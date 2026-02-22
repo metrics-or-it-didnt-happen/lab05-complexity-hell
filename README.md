@@ -1,4 +1,4 @@
-# Lab 05: Complexity Hell — zakamarki złożoności cyklomatycznej
+# Lab 05: Complexity Hell - zakamarki złożoności cyklomatycznej
 
 ## Czy wiesz, że...
 
@@ -6,7 +6,7 @@ Według badań (które właśnie wymyśliłem), rekord świata w złożoności c
 
 ## Kontekst
 
-Na poprzednim labie liczyliśmy linie kodu — prosta metryka, ale mało mówi o tym, jak skomplikowana jest logika. Funkcja z 50 liniami prostych przypisań jest prostsza od funkcji z 20 liniami pełnymi zagnieżdżonych if-else.
+Na poprzednim labie liczyliśmy linie kodu - prosta metryka, ale mało mówi o tym, jak skomplikowana jest logika. Funkcja z 50 liniami prostych przypisań jest prostsza od funkcji z 20 liniami pełnymi zagnieżdżonych if-else.
 
 Złożoność cyklomatyczna (Cyclomatic Complexity, CC) Thomasa McCabe'a z 1976 roku mierzy liczbę niezależnych ścieżek przez kod. Każdy `if`, `for`, `while`, `and`, `or`, `except` dodaje jedną ścieżkę. Im więcej ścieżek, tym trudniej zrozumieć funkcję, tym więcej testów potrzeba, i tym większe ryzyko bugów.
 
@@ -39,7 +39,7 @@ Gdzie:
 - N = liczba węzłów
 - P = liczba połączonych komponentów (zwykle 1 dla jednej funkcji)
 
-W praktyce liczy się prościej — zaczynamy od 1 i dodajemy 1 za każdy:
+W praktyce liczy się prościej - zaczynamy od 1 i dodajemy 1 za każdy:
 - `if`, `elif`
 - `for`, `while`
 - `and`, `or` (w warunkach)
@@ -69,7 +69,7 @@ git clone https://github.com/psf/requests.git
 # lub inny projekt z wyboru
 ```
 
-**Krok 2:** radon — złożoność cyklomatyczna:
+**Krok 2:** radon - złożoność cyklomatyczna:
 
 ```bash
 # Analiza całego projektu, sortowanie po złożoności
@@ -82,14 +82,14 @@ radon cc requests/src/ -s -n C
 radon cc requests/src/ -s -j > radon_output.json
 ```
 
-**Krok 3:** radon — Maintainability Index:
+**Krok 3:** radon - Maintainability Index:
 
 ```bash
 # Indeks utrzymywalności (0-100, im wyżej tym lepiej)
 radon mi requests/src/ -s
 ```
 
-**Krok 4:** lizard — wielojęzyczny analizator:
+**Krok 4:** lizard - wielojęzyczny analizator:
 
 ```bash
 # Analiza z domyślnymi progami
@@ -105,10 +105,10 @@ lizard requests/src/ --csv > lizard_output.csv
 **Krok 5:** Porównaj wyniki radon vs lizard:
 
 1. Czy oba narzędzia zgadzają się co do "najgorszej" funkcji?
-2. Czy wartości CC są identyczne? Jeśli nie — dlaczego?
+2. Czy wartości CC są identyczne? Jeśli nie - dlaczego?
 3. Które narzędzie daje więcej informacji?
 
-**Krok 6:** Znajdź "najgorszą" funkcję w projekcie — otwórz ją i oceń: czy naprawdę jest aż tak złożona, jak mówi metryka?
+**Krok 6:** Znajdź "najgorszą" funkcję w projekcie - otwórz ją i oceń: czy naprawdę jest aż tak złożona, jak mówi metryka?
 
 ### Zadanie 2: Complexity Profiler (60 min)
 
@@ -294,7 +294,7 @@ Rank   CC Typ      Nazwa                                    Plik:linia
   F (50+):      0 (0.0%)
 ```
 
-### Zadanie 3: Złożoność vs bugi (45 min) — dla ambitnych
+### Zadanie 3: Złożoność vs bugi (45 min) - dla ambitnych
 
 Czy pliki o wyższej złożoności mają więcej bugów? Sprawdźmy prostą korelację.
 
@@ -335,10 +335,10 @@ Uwaga: `--all-match` wymaga spełnienia WSZYSTKICH `--grep`. Jeśli chcesz OR, u
 
 W swoim branchu `lab05_nazwisko1_nazwisko2`:
 
-1. **`complexity_profiler.py`** — działający skrypt z zadania 2
-2. **`complexity_histogram.png`** — wygenerowany histogram
-3. **`answers.md`** — odpowiedzi z zadania 1 (porównanie radon vs lizard, analiza "najgorszej" funkcji)
-4. *(opcjonalnie)* **`complexity_vs_bugs.png`** — scatter plot z zadania 3
+1. **`complexity_profiler.py`** - działający skrypt z zadania 2
+2. **`complexity_histogram.png`** - wygenerowany histogram
+3. **`answers.md`** - odpowiedzi z zadania 1 (porównanie radon vs lizard, analiza "najgorszej" funkcji)
+4. *(opcjonalnie)* **`complexity_vs_bugs.png`** - scatter plot z zadania 3
 
 ## Kryteria oceny
 
@@ -352,16 +352,16 @@ W swoim branchu `lab05_nazwisko1_nazwisko2`:
 ## FAQ
 
 **P: radon i lizard dają różne wartości CC dla tej samej funkcji.**
-O: To normalne. Narzędzia mogą różnić się w szczegółach (np. czy `and`/`or` w warunkach zwiększa CC). Opisz różnice — to część zadania.
+O: To normalne. Narzędzia mogą różnić się w szczegółach (np. czy `and`/`or` w warunkach zwiększa CC). Opisz różnice - to część zadania.
 
 **P: Radon mówi, że klasa ma CC = 35, ale żadna metoda nie przekracza 10.**
-O: CC klasy to suma CC jej metod. Klasa z 7 prostymi metodami po CC=5 będzie mieć CC=35. To niekoniecznie źle — patrzmy na metody, nie na klasę.
+O: CC klasy to suma CC jej metod. Klasa z 7 prostymi metodami po CC=5 będzie mieć CC=35. To niekoniecznie źle - patrzmy na metody, nie na klasę.
 
 **P: Co to jest Maintainability Index?**
 O: Wzór łączący CC, Halstead Volume i LOC. Skala 0-100 (im wyżej, tym łatwiej utrzymać). `radon mi` go liczy. Przydatny jako "quick glance", ale nie zastępuje szczegółowej analizy.
 
 **P: Moja "najgorsza" funkcja to parser/dispatcher z wielkim switchem. Czy naprawdę jest zła?**
-O: Niekoniecznie. CC karze rozgałęzienia, ale dispatcher z 20 prostymi case'ami może być łatwiejszy do zrozumienia niż skomplikowana rekurencja z CC=5. Metryka to nie wyrok — to sygnał do przyjrzenia się.
+O: Niekoniecznie. CC karze rozgałęzienia, ale dispatcher z 20 prostymi case'ami może być łatwiejszy do zrozumienia niż skomplikowana rekurencja z CC=5. Metryka to nie wyrok - to sygnał do przyjrzenia się.
 
 ## Przydatne linki
 
@@ -369,7 +369,7 @@ O: Niekoniecznie. CC karze rozgałęzienia, ale dispatcher z 20 prostymi case'am
 - [lizard documentation](https://github.com/terryyin/lizard)
 - [McCabe's Cyclomatic Complexity (Wikipedia)](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
 - [Halstead complexity measures](https://en.wikipedia.org/wiki/Halstead_complexity_measures)
-- [A Complexity Measure (McCabe, 1976) — oryginalny paper](https://doi.org/10.1109/TSE.1976.233837)
+- [A Complexity Measure (McCabe, 1976) - oryginalny paper](https://doi.org/10.1109/TSE.1976.233837)
 
 ---
-*"Prostota jest warunkiem koniecznym niezawodności."* — Edsger Dijkstra (ten cytat jest prawdziwy)
+*"Prostota jest warunkiem koniecznym niezawodności."* - Edsger Dijkstra (ten cytat jest prawdziwy)

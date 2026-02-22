@@ -1,0 +1,375 @@
+# Lab 05: Complexity Hell — zakamarki zlozonosci cyklomatycznej
+
+## Czy wiesz, ze...
+
+Wedlug badan (ktore wlasnie wymyslilem), rekord swiata w zlozonosci cyklomatycznej jednej funkcji wynosi 2347. Funkcja ta obslugiwala formularz podatkowy w USA. Nikt nie wie, czy dziala poprawnie, bo nikt nie jest w stanie napisac tylu testow.
+
+## Kontekst
+
+Na poprzednim labie liczyliśmy linie kodu — prosta metryka, ale mało mówi o tym, jak skomplikowana jest logika. Funkcja z 50 liniami prostych przypisań jest prostsza od funkcji z 20 liniami pełnymi zagnieżdżonych if-else.
+
+Złożoność cyklomatyczna (Cyclomatic Complexity, CC) Thomasa McCabe'a z 1976 roku mierzy liczbę niezależnych ścieżek przez kod. Każdy `if`, `for`, `while`, `and`, `or`, `except` dodaje jedną ścieżkę. Im więcej ścieżek, tym trudniej zrozumieć funkcję, tym więcej testów potrzeba, i tym większe ryzyko bugów.
+
+W praktyce CC służy do: identyfikacji funkcji wymagających refaktoryzacji, szacowania nakładu testowania, oceny jakości kodu w code review, i jako input do modeli predykcji defektów (które będziemy budować na labach 10-12).
+
+## Cel laboratorium
+
+Po tym laboratorium będziesz potrafić:
+- wyjaśnić co mierzy złożoność cyklomatyczna i jak się ją liczy,
+- używać narzędzi `radon` i `lizard` do analizy złożoności kodu Python,
+- napisać skrypt generujący profil złożoności projektu z histogramem,
+- interpretować wyniki i identyfikować funkcje wymagające refaktoryzacji.
+
+## Wymagania wstępne
+
+- Python 3.9+
+- `radon` (`pip install radon`)
+- `lizard` (`pip install lizard`)
+- `matplotlib` (do wizualizacji)
+- Sklonowany projekt open-source (Pythonowy, z co najmniej kilkudziesięcioma plikami)
+
+## Trochę teorii
+
+### Jak liczyć CC?
+
+Złożoność cyklomatyczna to: **CC = E - N + 2P**
+
+Gdzie:
+- E = liczba krawędzi w grafie przepływu
+- N = liczba węzłów
+- P = liczba połączonych komponentów (zwykle 1 dla jednej funkcji)
+
+W praktyce liczy się prościej — zaczynamy od 1 i dodajemy 1 za każdy:
+- `if`, `elif`
+- `for`, `while`
+- `and`, `or` (w warunkach)
+- `except`
+- `assert`
+
+### Interpretacja wyników
+
+| CC | Ranking | Znaczenie |
+|----|---------|-----------|
+| 1-5 | A | Prosta, łatwa do zrozumienia |
+| 6-10 | B | Umiarkowana, do ogarnięcia |
+| 11-20 | C | Złożona, kandydat do refaktoryzacji |
+| 21-50 | D | Bardzo złożona, trudna w utrzymaniu |
+| 50+ | F | Nie do utrzymania, refaktoryzuj natychmiast |
+
+## Zadania
+
+### Zadanie 1: radon i lizard (30 min)
+
+Dwa narzędzia, dwa podejścia. Porównajmy.
+
+**Krok 1:** Sklonuj projekt OSS (jeśli jeszcze nie masz):
+
+```bash
+git clone https://github.com/psf/requests.git
+# lub inny projekt z wyboru
+```
+
+**Krok 2:** radon — złożoność cyklomatyczna:
+
+```bash
+# Analiza całego projektu, sortowanie po złożoności
+radon cc requests/src/ -s -a
+
+# Tylko funkcje z CC >= 10 (problematyczne)
+radon cc requests/src/ -s -n C
+
+# Output jako JSON (do parsowania)
+radon cc requests/src/ -s -j > radon_output.json
+```
+
+**Krok 3:** radon — Maintainability Index:
+
+```bash
+# Indeks utrzymywalności (0-100, im wyżej tym lepiej)
+radon mi requests/src/ -s
+```
+
+**Krok 4:** lizard — wielojęzyczny analizator:
+
+```bash
+# Analiza z domyślnymi progami
+lizard requests/src/
+
+# Tylko funkcje przekraczające próg CC > 10
+lizard requests/src/ -C 10
+
+# Output jako CSV
+lizard requests/src/ --csv > lizard_output.csv
+```
+
+**Krok 5:** Porównaj wyniki radon vs lizard:
+
+1. Czy oba narzędzia zgadzają się co do "najgorszej" funkcji?
+2. Czy wartości CC są identyczne? Jeśli nie — dlaczego?
+3. Które narzędzie daje więcej informacji?
+
+**Krok 6:** Znajdź "najgorszą" funkcję w projekcie — otwórz ją i oceń: czy naprawdę jest aż tak złożona, jak mówi metryka?
+
+### Zadanie 2: Complexity Profiler (60 min)
+
+Napiszcie skrypt `complexity_profiler.py`, który generuje kompletny profil złożoności projektu.
+
+**Co skrypt ma robić:**
+
+1. Uruchomić radon na wskazanym katalogu (JSON output)
+2. Sparsować wyniki
+3. Wygenerować:
+   - Ranking: top 20 najbardziej złożonych funkcji/metod
+   - Statystyki: średnia CC, mediana, odchylenie standardowe
+   - Rozkład: ile funkcji w każdym rankingu (A/B/C/D/F)
+   - Procent funkcji z CC > 10
+   - Histogram złożoności (matplotlib)
+
+**Punkt startowy:**
+
+```python
+#!/usr/bin/env python3
+"""Complexity Profiler - cyclomatic complexity analysis of Python projects."""
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+from statistics import mean, median, stdev
+
+import matplotlib.pyplot as plt
+
+
+def run_radon(project_path: str) -> dict:
+    """Run radon cc with JSON output and return parsed results."""
+    result = subprocess.run(
+        ["radon", "cc", project_path, "-s", "-j"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    return json.loads(result.stdout)
+
+
+def extract_functions(radon_data: dict) -> list[dict]:
+    """Extract all functions/methods from radon JSON output.
+
+    Returns list of dicts with keys:
+        name, type, complexity, rank, file, lineno
+    """
+    functions = []
+    for filepath, items in radon_data.items():
+        for item in items:
+            functions.append({
+                "name": item["name"],
+                "type": item["type"],  # "function", "method", "class"
+                "complexity": item["complexity"],
+                "rank": item["rank"],
+                "file": filepath,
+                "lineno": item["lineno"],
+            })
+            # Klasy mogą mieć zagnieżdżone metody
+            for method in item.get("methods", []):
+                functions.append({
+                    "name": f"{item['name']}.{method['name']}",
+                    "type": "method",
+                    "complexity": method["complexity"],
+                    "rank": method["rank"],
+                    "file": filepath,
+                    "lineno": method["lineno"],
+                })
+    return functions
+
+
+def compute_stats(functions: list[dict]) -> dict:
+    """Compute summary statistics."""
+    if not functions:
+        return {}
+
+    complexities = [f["complexity"] for f in functions]
+
+    # TODO: Twój kod tutaj
+    # Policz: mean, median, stdev, rozkład rankingów (A/B/C/D/F),
+    # procent z CC > 10
+    pass
+
+
+def top_complex(functions: list[dict], n: int = 20) -> list[dict]:
+    """Return top N most complex functions."""
+    return sorted(functions, key=lambda f: f["complexity"], reverse=True)[:n]
+
+
+def plot_histogram(functions: list[dict], output_path: str) -> None:
+    """Plot and save complexity histogram."""
+    complexities = [f["complexity"] for f in functions]
+
+    # TODO: Twój kod tutaj
+    # Histogram z matplotlib
+    # Oś X: złożoność cyklomatyczna
+    # Oś Y: liczba funkcji
+    # Dodaj linie pionowe oznaczające progi (5, 10, 20)
+    # Kolorowanie: zielony (A), żółty (B), pomarańczowy (C),
+    #              czerwony (D), ciemnoczerwony (F)
+    pass
+
+
+def print_report(functions: list[dict], stats: dict) -> None:
+    """Print formatted complexity report."""
+    print(f"\n{'=' * 70}")
+    print(f"PROFIL ZŁOŻONOŚCI CYKLOMATYCZNEJ")
+    print(f"{'=' * 70}")
+
+    print(f"\n--- Statystyki ogólne ---")
+    print(f"  Liczba funkcji/metod: {len(functions)}")
+    # TODO: wydrukuj resztę statystyk
+
+    print(f"\n--- TOP 20 najbardziej złożonych ---")
+    print(f"{'Rank':<5} {'CC':>4} {'Typ':<8} {'Nazwa':<40} {'Plik:linia'}")
+    print("-" * 90)
+    for f in top_complex(functions):
+        loc = f"{f['file']}:{f['lineno']}"
+        if len(loc) > 30:
+            loc = "..." + loc[-27:]
+        print(f"  {f['rank']:<3} {f['complexity']:>4} {f['type']:<8} "
+              f"{f['name']:<40} {loc}")
+
+    print(f"\n--- Rozkład rankingów ---")
+    # TODO: wydrukuj rozkład A/B/C/D/F
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Użycie: python complexity_profiler.py <ścieżka_do_projektu>")
+        sys.exit(1)
+
+    project_path = sys.argv[1]
+    print(f"Analizuję złożoność: {project_path}")
+
+    radon_data = run_radon(project_path)
+    functions = extract_functions(radon_data)
+
+    if not functions:
+        print("Nie znaleziono funkcji do analizy.")
+        sys.exit(1)
+
+    stats = compute_stats(functions)
+    print_report(functions, stats)
+    plot_histogram(functions, "complexity_histogram.png")
+    print(f"\nHistogram zapisany do: complexity_histogram.png")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+**Oczekiwany output (przykład):**
+
+```
+Analizuję złożoność: requests/src/
+
+======================================================================
+PROFIL ZŁOŻONOŚCI CYKLOMATYCZNEJ
+======================================================================
+
+--- Statystyki ogólne ---
+  Liczba funkcji/metod: 187
+  Średnia CC:            4.2
+  Mediana CC:            2.0
+  Odch. standardowe:     5.1
+  Funkcje z CC > 10:     8 (4.3%)
+
+--- TOP 20 najbardziej złożonych ---
+Rank   CC Typ      Nazwa                                    Plik:linia
+------------------------------------------------------------------------------------------
+  D    23 method   Session.request                          ...requests/sessions.py:421
+  C    17 function resolve_redirects                        ...requests/sessions.py:95
+  C    14 method   HTTPAdapter.send                         ...requests/adapters.py:389
+  ...
+
+--- Rozkład rankingów ---
+  A (1-5):    142 (75.9%)  ████████████████████████████████
+  B (6-10):    37 (19.8%)  ████████
+  C (11-20):    6 (3.2%)   █
+  D (21-50):    2 (1.1%)
+  F (50+):      0 (0.0%)
+```
+
+### Zadanie 3: Zlozonosc vs bugi (45 min) — dla ambitnych
+
+Czy pliki o wyższej złożoności mają więcej bugów? Sprawdźmy prostą korelację.
+
+**Pomysł:**
+- Dla każdego pliku `.py` w projekcie policz średnią CC (z radona)
+- Z `git log` wyciągnij liczbę commitów z "fix"/"bug"/"error" w message dotyczących tego pliku
+- Narysuj scatter plot: oś X = średnia CC, oś Y = liczba bugfix commitów
+- Policz korelację (Pearson lub Spearman)
+
+```python
+import subprocess
+from collections import Counter
+
+def count_bugfix_commits(repo_path: str) -> dict[str, int]:
+    """Count bugfix commits per file using git log."""
+    result = subprocess.run(
+        ["git", "log", "--format=%s", "--name-only",
+         "--grep=fix", "--grep=bug", "--grep=error",
+         "--all-match"],
+        cwd=repo_path,
+        capture_output=True,
+        text=True,
+    )
+
+    # Parsowanie: commit message, potem lista plików, potem pusta linia
+    file_counts = Counter()
+    lines = result.stdout.strip().split("\n")
+    for line in lines:
+        if line.endswith(".py"):
+            file_counts[line] += 1
+
+    return dict(file_counts)
+```
+
+Uwaga: `--all-match` wymaga spełnienia WSZYSTKICH `--grep`. Jeśli chcesz OR, użyj jednego `--grep="fix\|bug\|error"` lub uruchom oddzielne komendy.
+
+## Co oddajecie
+
+W swoim branchu `lab05_nazwisko1_nazwisko2`:
+
+1. **`complexity_profiler.py`** — działający skrypt z zadania 2
+2. **`complexity_histogram.png`** — wygenerowany histogram
+3. **`answers.md`** — odpowiedzi z zadania 1 (porównanie radon vs lizard, analiza "najgorszej" funkcji)
+4. *(opcjonalnie)* **`complexity_vs_bugs.png`** — scatter plot z zadania 3
+
+## Kryteria oceny
+
+- Skrypt poprawnie parsuje output radona (JSON)
+- Statystyki (średnia, mediana, stdev) są wyliczone poprawnie
+- Ranking top 20 jest posortowany malejąco po CC
+- Rozkład rankingów A/B/C/D/F sumuje się do 100%
+- Histogram jest czytelny i zawiera progi (5, 10, 20)
+- Porównanie radon vs lizard w answers.md jest konkretne
+
+## FAQ
+
+**P: radon i lizard dają różne wartości CC dla tej samej funkcji.**
+O: To normalne. Narzędzia mogą różnić się w szczegółach (np. czy `and`/`or` w warunkach zwiększa CC). Opisz różnice — to część zadania.
+
+**P: Radon mówi, że klasa ma CC = 35, ale żadna metoda nie przekracza 10.**
+O: CC klasy to suma CC jej metod. Klasa z 7 prostymi metodami po CC=5 będzie mieć CC=35. To niekoniecznie źle — patrzmy na metody, nie na klasę.
+
+**P: Co to jest Maintainability Index?**
+O: Wzór łączący CC, Halstead Volume i LOC. Skala 0-100 (im wyżej, tym łatwiej utrzymać). `radon mi` go liczy. Przydatny jako "quick glance", ale nie zastępuje szczegółowej analizy.
+
+**P: Moja "najgorsza" funkcja to parser/dispatcher z wielkim switchem. Czy naprawdę jest zła?**
+O: Niekoniecznie. CC karze rozgałęzienia, ale dispatcher z 20 prostymi case'ami może być łatwiejszy do zrozumienia niż skomplikowana rekurencja z CC=5. Metryka to nie wyrok — to sygnał do przyjrzenia się.
+
+## Przydatne linki
+
+- [radon documentation](https://radon.readthedocs.io/)
+- [lizard documentation](https://github.com/terryyin/lizard)
+- [McCabe's Cyclomatic Complexity (Wikipedia)](https://en.wikipedia.org/wiki/Cyclomatic_complexity)
+- [Halstead complexity measures](https://en.wikipedia.org/wiki/Halstead_complexity_measures)
+- [A Complexity Measure (McCabe, 1976) — oryginalny paper](https://doi.org/10.1109/TSE.1976.233837)
+
+---
+*"Prostota jest warunkiem koniecznym niezawodności."* — Edsger Dijkstra (ten cytat jest prawdziwy)

@@ -1,8 +1,8 @@
-# Lab 05: Complexity Hell — zakamarki zlozonosci cyklomatycznej
+# Lab 05: Complexity Hell — zakamarki złożoności cyklomatycznej
 
-## Czy wiesz, ze...
+## Czy wiesz, że...
 
-Wedlug badan (ktore wlasnie wymyslilem), rekord swiata w zlozonosci cyklomatycznej jednej funkcji wynosi 2347. Funkcja ta obslugiwala formularz podatkowy w USA. Nikt nie wie, czy dziala poprawnie, bo nikt nie jest w stanie napisac tylu testow.
+Według badań (które właśnie wymyśliłem), rekord świata w złożoności cyklomatycznej jednej funkcji wynosi 2347. Funkcja ta obsługiwała formularz podatkowy w USA. Nikt nie wie, czy działa poprawnie, bo nikt nie jest w stanie napisać tylu testów.
 
 ## Kontekst
 
@@ -294,7 +294,7 @@ Rank   CC Typ      Nazwa                                    Plik:linia
   F (50+):      0 (0.0%)
 ```
 
-### Zadanie 3: Zlozonosc vs bugi (45 min) — dla ambitnych
+### Zadanie 3: Złożoność vs bugi (45 min) — dla ambitnych
 
 Czy pliki o wyższej złożoności mają więcej bugów? Sprawdźmy prostą korelację.
 

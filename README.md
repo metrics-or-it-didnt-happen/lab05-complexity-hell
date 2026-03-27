@@ -1,5 +1,7 @@
 # Lab 05: Complexity Hell - zakamarki złożoności cyklomatycznej
 
+![Gruszka po code review funkcji z CC > 50](gruszka.jpg)
+
 ## Czy wiesz, że...
 
 Według badań (które właśnie wymyśliłem), rekord świata w złożoności cyklomatycznej jednej funkcji wynosi 2347. Funkcja ta obsługiwała formularz podatkowy w USA. Nikt nie wie, czy działa poprawnie, bo nikt nie jest w stanie napisać tylu testów.

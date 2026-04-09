@@ -28,7 +28,7 @@ Po tym laboratorium będziesz potrafić:
 - `radon` (`pip install radon`)
 - `lizard` (`pip install lizard`)
 - `matplotlib` (do wizualizacji)
-- Sklonowany projekt open-source (Pythonowy, z co najmniej kilkudziesięcioma plikami)
+- Sklonowany projekt open-source **w Pythonie**, z co najmniej kilkudziesięcioma plikami `.py`. `radon` działa wyłącznie z Pythonem - jeśli weźmiecie projekt w innym języku, radon zwróci pusty output. `lizard` obsługuje wiele języków, ale na tym labie pracujemy z radonem jako głównym narzędziem.
 
 ## Trochę teorii
 
@@ -55,8 +55,9 @@ W praktyce liczy się prościej - zaczynamy od 1 i dodajemy 1 za każdy:
 | 1-5 | A | Prosta, łatwa do zrozumienia |
 | 6-10 | B | Umiarkowana, do ogarnięcia |
 | 11-20 | C | Złożona, kandydat do refaktoryzacji |
-| 21-50 | D | Bardzo złożona, trudna w utrzymaniu |
-| 50+ | F | Nie do utrzymania, refaktoryzuj natychmiast |
+| 21-30 | D | Bardzo złożona, trudna w utrzymaniu |
+| 31-40 | E | Alarmująca, na granicy zrozumienia |
+| 41+ | F | Nie do utrzymania, refaktoryzuj natychmiast |
 
 ## Zadania
 
@@ -117,6 +118,8 @@ lizard /tmp/requests/src/ --csv > lizard_output.csv
 
 **Krok 6:** Znajdź "najgorszą" funkcję w projekcie - otwórz ją i oceń: czy naprawdę jest aż tak złożona, jak mówi metryka?
 
+Odpowiedzi z kroków 5 i 6 zapiszcie w `answers.md`.
+
 ### Zadanie 2: Complexity Profiler (60 min)
 
 Napiszcie skrypt `complexity_profiler.py`, który generuje kompletny profil złożoności projektu.
@@ -128,7 +131,7 @@ Napiszcie skrypt `complexity_profiler.py`, który generuje kompletny profil zło
 3. Wygenerować:
    - Ranking: top 20 najbardziej złożonych funkcji/metod
    - Statystyki: średnia CC, mediana, odchylenie standardowe
-   - Rozkład: ile funkcji w każdym rankingu (A/B/C/D/F)
+   - Rozkład: ile funkcji w każdym rankingu (A/B/C/D/E/F)
    - Procent funkcji z CC > 10
    - Histogram złożoności (matplotlib)
 
@@ -193,8 +196,9 @@ def compute_stats(functions: list[dict]) -> dict:
     complexities = [f["complexity"] for f in functions]
 
     # TODO: Twój kod tutaj
-    # Policz: mean, median, stdev, rozkład rankingów (A/B/C/D/F),
+    # Policz: mean, median, stdev, rozkład rankingów (A/B/C/D/E/F),
     # procent z CC > 10
+    # Uwaga: stdev() wymaga co najmniej 2 elementów - obsłuż ten przypadek
     pass
 
 
@@ -211,9 +215,9 @@ def plot_histogram(functions: list[dict], output_path: str) -> None:
     # Histogram z matplotlib
     # Oś X: złożoność cyklomatyczna
     # Oś Y: liczba funkcji
-    # Dodaj linie pionowe oznaczające progi (5, 10, 20)
+    # Dodaj linie pionowe oznaczające progi (5, 10, 20, 30, 40)
     # Kolorowanie: zielony (A), żółty (B), pomarańczowy (C),
-    #              czerwony (D), ciemnoczerwony (F)
+    #              czerwony (D), ciemnoczerwony (E), czarny (F)
     pass
 
 
@@ -238,7 +242,7 @@ def print_report(functions: list[dict], stats: dict) -> None:
               f"{f['name']:<40} {loc}")
 
     print(f"\n--- Rozkład rankingów ---")
-    # TODO: wydrukuj rozkład A/B/C/D/F
+    # TODO: wydrukuj rozkład A/B/C/D/E/F
 
 
 def main():
@@ -297,13 +301,16 @@ Rank   CC Typ      Nazwa                                    Plik:linia
   A (1-5):    188 (80.7%)  ████████████████████████████████
   B (6-10):    32 (13.7%)  █████
   C (11-20):   12 (5.2%)   ██
-  D (21-50):    1 (0.4%)
-  F (50+):      0 (0.0%)
+  D (21-30):    1 (0.4%)
+  E (31-40):    0 (0.0%)
+  F (41+):      0 (0.0%)
 ```
 
 > **Uwaga:** Wyniki mogą się nieco różnić w zależności od wersji `requests`. Ważne, żeby format i logika były poprawne - konkretne liczby mogą być inne.
 
 ### Zadanie 3: Złożoność vs bugi (45 min) - dla ambitnych
+
+> **Uwaga:** Do tego zadania potrzebujecie pełnej historii repozytorium. Jeśli klonowaliście projekt z `--depth 1`, `git log` nie zwróci żadnych wyników. Sklonujcie ponownie bez tej flagi albo użyjcie `git fetch --unshallow`.
 
 Czy pliki o wyższej złożoności mają więcej bugów? Sprawdźmy prostą korelację.
 
@@ -339,6 +346,8 @@ def count_bugfix_commits(repo_path: str) -> dict[str, int]:
 
 Uwaga: wiele flag `--grep` działa jako OR (commit pasuje, jeśli message zawiera "fix" LUB "bug" LUB "error"). Jeśli chcesz AND (wszystkie naraz), dodaj `--all-match`.
 
+Uwaga 2: ścieżki plików w `git log` mogą nie zgadzać się ze ścieżkami z radona. Np. `requests` kiedyś trzymał kod w `requests/`, a teraz w `src/requests/`. Przy dopasowywaniu plików warto porównywać po samej nazwie pliku (np. `models.py`), nie po pełnej ścieżce.
+
 ## Co oddajecie
 
 W swoim branchu `lab05_nazwisko1_nazwisko2`:
@@ -353,8 +362,8 @@ W swoim branchu `lab05_nazwisko1_nazwisko2`:
 - Skrypt poprawnie parsuje output radona (JSON)
 - Statystyki (średnia, mediana, stdev) są wyliczone poprawnie
 - Ranking top 20 jest posortowany malejąco po CC
-- Rozkład rankingów A/B/C/D/F sumuje się do 100%
-- Histogram jest czytelny i zawiera progi (5, 10, 20)
+- Rozkład rankingów A/B/C/D/E/F sumuje się do 100%
+- Histogram jest czytelny i zawiera progi (5, 10, 20, 30, 40)
 - Porównanie radon vs lizard w answers.md jest konkretne
 
 ## FAQ
@@ -370,6 +379,9 @@ O: Wzór łączący CC, Halstead Volume i LOC. Skala 0-100 (im wyżej, tym łatw
 
 **P: Moja "najgorsza" funkcja to parser/dispatcher z wielkim switchem. Czy naprawdę jest zła?**
 O: Niekoniecznie. CC karze rozgałęzienia, ale dispatcher z 20 prostymi case'ami może być łatwiejszy do zrozumienia niż skomplikowana rekurencja z CC=5. Metryka to nie wyrok - to sygnał do przyjrzenia się.
+
+**P: `stdev()` wywala się z błędem gdy mam mało funkcji.**
+O: `statistics.stdev()` wymaga co najmniej 2 elementów. Jeśli analizujesz mały projekt z jedną funkcją, musisz to obsłużyć - np. zwrócić 0.0 albo `None` i wypisać stosowny komunikat.
 
 ## Przydatne linki
 

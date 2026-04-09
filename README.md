@@ -66,42 +66,47 @@ Dwa narzędzia, dwa podejścia. Porównajmy.
 
 **Krok 1:** Sklonuj projekt OSS (jeśli jeszcze nie masz):
 
+> **WAŻNE:** Klonujcie repozytoria do `/tmp` albo innego katalogu POZA waszym repozytorium labowym. Jeśli sklonujecie je do katalogu roboczego i zrobicie `git add .`, commitniecie tysiące cudzych plików. Nie chcecie tego. Nikt tego nie chce.
+
 ```bash
+cd /tmp
 git clone https://github.com/psf/requests.git
-# lub inny projekt z wyboru
+# lub inny projekt Pythonowy z wyboru
 ```
+
+> **Uwaga o ścieżkach:** `requests` trzyma kod źródłowy w `src/requests/`. Inny projekt może mieć inną strukturę (np. kod bezpośrednio w katalogu głównym). Sprawdźcie gdzie są pliki `.py` w waszym projekcie i dostosujcie ścieżki w komendach poniżej. W przykładach używamy `/tmp/requests/src/` - zamieńcie na właściwą ścieżkę do waszego projektu.
 
 **Krok 2:** radon - złożoność cyklomatyczna:
 
 ```bash
 # Analiza całego projektu, sortowanie po złożoności
-radon cc requests/src/ -s -a
+radon cc /tmp/requests/src/ -s -a
 
-# Tylko funkcje z CC >= 10 (problematyczne)
-radon cc requests/src/ -s -n C
+# Tylko funkcje z rankingiem C i gorszym (CC >= 11)
+radon cc /tmp/requests/src/ -s -n C
 
 # Output jako JSON (do parsowania)
-radon cc requests/src/ -s -j > radon_output.json
+radon cc /tmp/requests/src/ -s -j > radon_output.json
 ```
 
 **Krok 3:** radon - Maintainability Index:
 
 ```bash
 # Indeks utrzymywalności (0-100, im wyżej tym lepiej)
-radon mi requests/src/ -s
+radon mi /tmp/requests/src/ -s
 ```
 
 **Krok 4:** lizard - wielojęzyczny analizator:
 
 ```bash
 # Analiza z domyślnymi progami
-lizard requests/src/
+lizard /tmp/requests/src/
 
 # Tylko funkcje przekraczające próg CC > 10
-lizard requests/src/ -C 10
+lizard /tmp/requests/src/ -C 10
 
 # Output jako CSV
-lizard requests/src/ --csv > lizard_output.csv
+lizard /tmp/requests/src/ --csv > lizard_output.csv
 ```
 
 **Krok 5:** Porównaj wyniki radon vs lizard:
@@ -158,28 +163,25 @@ def extract_functions(radon_data: dict) -> list[dict]:
 
     Returns list of dicts with keys:
         name, type, complexity, rank, file, lineno
+
+    Uwaga: radon w JSON-ie listuje metody podwójnie - raz jako
+    top-level items, raz zagnieżdżone w klasach. Bierzemy tylko
+    top-level items i pomijamy klasy (ich CC to suma CC metod,
+    a metody są już wylistowane osobno).
     """
     functions = []
     for filepath, items in radon_data.items():
         for item in items:
+            if item["type"] == "class":
+                continue  # pomijamy klasy - ich metody są już na liście
             functions.append({
                 "name": item["name"],
-                "type": item["type"],  # "function", "method", "class"
+                "type": item["type"],  # "function" lub "method"
                 "complexity": item["complexity"],
                 "rank": item["rank"],
                 "file": filepath,
                 "lineno": item["lineno"],
             })
-            # Klasy mogą mieć zagnieżdżone metody
-            for method in item.get("methods", []):
-                functions.append({
-                    "name": f"{item['name']}.{method['name']}",
-                    "type": "method",
-                    "complexity": method["complexity"],
-                    "rank": method["rank"],
-                    "file": filepath,
-                    "lineno": method["lineno"],
-                })
     return functions
 
 
@@ -264,37 +266,42 @@ if __name__ == "__main__":
     main()
 ```
 
-**Oczekiwany output (przykład):**
+**Oczekiwany output (przykład dla `requests`, kwiecień 2026):**
 
 ```
-Analizuję złożoność: requests/src/
+Analizuję złożoność: /tmp/requests/src/
 
 ======================================================================
 PROFIL ZŁOŻONOŚCI CYKLOMATYCZNEJ
 ======================================================================
 
 --- Statystyki ogólne ---
-  Liczba funkcji/metod: 187
-  Średnia CC:            4.2
+  Liczba funkcji/metod: 233
+  Średnia CC:            3.5
   Mediana CC:            2.0
-  Odch. standardowe:     5.1
-  Funkcje z CC > 10:     8 (4.3%)
+  Odch. standardowe:     3.7
+  Funkcje z CC > 10:     13 (5.6%)
 
 --- TOP 20 najbardziej złożonych ---
 Rank   CC Typ      Nazwa                                    Plik:linia
 ------------------------------------------------------------------------------------------
-  D    23 method   Session.request                          ...requests/sessions.py:421
-  C    17 function resolve_redirects                        ...requests/sessions.py:95
-  C    14 method   HTTPAdapter.send                         ...requests/adapters.py:389
+  D    21 method   _encode_files                            ...requests/models.py:139
+  C    19 method   build_digest_header                      ...requests/auth.py:126
+  C    19 method   send                                     ...requests/adapters.py:591
+  C    18 function super_len                                ...requests/utils.py:135
+  C    17 method   prepare_url                              ...requests/models.py:411
+  C    17 method   prepare_body                             ...requests/models.py:496
   ...
 
 --- Rozkład rankingów ---
-  A (1-5):    142 (75.9%)  ████████████████████████████████
-  B (6-10):    37 (19.8%)  ████████
-  C (11-20):    6 (3.2%)   █
-  D (21-50):    2 (1.1%)
+  A (1-5):    188 (80.7%)  ████████████████████████████████
+  B (6-10):    32 (13.7%)  █████
+  C (11-20):   12 (5.2%)   ██
+  D (21-50):    1 (0.4%)
   F (50+):      0 (0.0%)
 ```
+
+> **Uwaga:** Wyniki mogą się nieco różnić w zależności od wersji `requests`. Ważne, żeby format i logika były poprawne - konkretne liczby mogą być inne.
 
 ### Zadanie 3: Złożoność vs bugi (45 min) - dla ambitnych
 
@@ -314,8 +321,7 @@ def count_bugfix_commits(repo_path: str) -> dict[str, int]:
     """Count bugfix commits per file using git log."""
     result = subprocess.run(
         ["git", "log", "--format=%s", "--name-only",
-         "--grep=fix", "--grep=bug", "--grep=error",
-         "--all-match"],
+         "--grep=fix", "--grep=bug", "--grep=error"],
         cwd=repo_path,
         capture_output=True,
         text=True,
@@ -331,7 +337,7 @@ def count_bugfix_commits(repo_path: str) -> dict[str, int]:
     return dict(file_counts)
 ```
 
-Uwaga: `--all-match` wymaga spełnienia WSZYSTKICH `--grep`. Jeśli chcesz OR, użyj jednego `--grep="fix\|bug\|error"` lub uruchom oddzielne komendy.
+Uwaga: wiele flag `--grep` działa jako OR (commit pasuje, jeśli message zawiera "fix" LUB "bug" LUB "error"). Jeśli chcesz AND (wszystkie naraz), dodaj `--all-match`.
 
 ## Co oddajecie
 

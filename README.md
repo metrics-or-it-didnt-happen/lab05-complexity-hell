@@ -25,9 +25,13 @@ Po tym laboratorium będziesz potrafić:
 ## Wymagania wstępne
 
 - Python 3.9+
-- `radon` (`pip install radon`)
-- `lizard` (`pip install lizard`)
-- `matplotlib` (do wizualizacji)
+- Pakiety z `requirements.txt`:
+  ```bash
+  python -m venv .venv
+  source .venv/bin/activate   # Linux/Mac
+  # .venv\Scripts\activate    # Windows
+  pip install -r requirements.txt
+  ```
 - Sklonowany projekt open-source **w Pythonie**, z co najmniej kilkudziesięcioma plikami `.py`. `radon` działa wyłącznie z Pythonem - jeśli weźmiecie projekt w innym języku, radon zwróci pusty output. `lizard` obsługuje wiele języków, ale na tym labie pracujemy z radonem jako głównym narzędziem.
 
 ## Trochę teorii
@@ -72,28 +76,41 @@ Dwa narzędzia, dwa podejścia. Porównajmy.
 ```bash
 cd /tmp
 git clone https://github.com/psf/requests.git
-# lub inny projekt Pythonowy z wyboru
 ```
 
-> **Uwaga o ścieżkach:** `requests` trzyma kod źródłowy w `src/requests/`. Inny projekt może mieć inną strukturę (np. kod bezpośrednio w katalogu głównym). Sprawdźcie gdzie są pliki `.py` w waszym projekcie i dostosujcie ścieżki w komendach poniżej. W przykładach używamy `/tmp/requests/src/` - zamieńcie na właściwą ścieżkę do waszego projektu.
+Możesz wybrać inny projekt Pythonowy. Kilka propozycji:
+- `https://github.com/pallets/flask.git` (flask - web framework)
+- `https://github.com/encode/httpx.git` (httpx - klient HTTP)
+- `https://github.com/psf/black.git` (black - formatter kodu)
+
+Ważne żeby miał co najmniej kilkadziesiąt plików `.py` - inaczej analiza będzie zbyt uboga.
+
+> **Uwaga o ścieżkach:** `requests` trzyma kod źródłowy w `src/requests/`. Inne projekty mogą mieć inną strukturę (np. `flask` trzyma kod w `src/flask/`, a `httpx` w `httpx/`). Sprawdźcie gdzie są pliki `.py` w waszym projekcie (`find /tmp/wasz-projekt -name "*.py" | head`) i dostosujcie ścieżki w komendach poniżej. W przykładach używamy `/tmp/requests/src/` - zamieńcie na właściwą ścieżkę do waszego projektu.
 
 **Krok 2:** radon - złożoność cyklomatyczna:
 
 ```bash
-# Analiza całego projektu, sortowanie po złożoności
+# Analiza całego projektu
+# -s = pokaż wartość CC przy każdej funkcji
+# -a = pokaż średnią na końcu
 radon cc /tmp/requests/src/ -s -a
 
 # Tylko funkcje z rankingiem C i gorszym (CC >= 11)
+# -n C = filtruj: pokaż ranking C, D, E, F (pomiń A i B)
 radon cc /tmp/requests/src/ -s -n C
 
-# Output jako JSON (do parsowania)
+# Output jako JSON (przyda się w zadaniu 2 do zrozumienia struktury)
+# -j = output w formacie JSON
 radon cc /tmp/requests/src/ -s -j > radon_output.json
 ```
+
+> Plik `radon_output.json` wyląduje w katalogu, w którym aktualnie jesteście w terminalu. Warto zajrzeć do niego w edytorze, żeby zobaczyć jak wygląda struktura JSON-a - przyda się w zadaniu 2.
 
 **Krok 3:** radon - Maintainability Index:
 
 ```bash
 # Indeks utrzymywalności (0-100, im wyżej tym lepiej)
+# -s = pokaż wartość MI przy każdym pliku
 radon mi /tmp/requests/src/ -s
 ```
 
@@ -104,6 +121,7 @@ radon mi /tmp/requests/src/ -s
 lizard /tmp/requests/src/
 
 # Tylko funkcje przekraczające próg CC > 10
+# -C 10 = pokaż ostrzeżenia dla funkcji z CC > 10
 lizard /tmp/requests/src/ -C 10
 
 # Output jako CSV
@@ -188,16 +206,26 @@ def extract_functions(radon_data: dict) -> list[dict]:
 
 
 def compute_stats(functions: list[dict]) -> dict:
-    """Compute summary statistics."""
+    """Compute summary statistics.
+
+    Zwróć dict z kluczami (przykład):
+        "mean", "median", "stdev",
+        "rank_counts" (dict: {"A": 142, "B": 37, ...}),
+        "above_10_count", "above_10_pct"
+    Te klucze wykorzystasz potem w print_report().
+    """
     if not functions:
         return {}
 
     complexities = [f["complexity"] for f in functions]
 
     # TODO: Twój kod tutaj
-    # Policz: mean, median, stdev, rozkład rankingów (A/B/C/D/E/F),
-    # procent z CC > 10
-    # Uwaga: stdev() wymaga co najmniej 2 elementów - obsłuż ten przypadek
+    # 1. Policz mean(complexities), median(complexities)
+    # 2. Policz stdev(complexities) - uwaga: wymaga >= 2 elementów!
+    # 3. Policz rozkład rankingów: ile funkcji ma rank A, B, C, D, E, F
+    #    (rank każdej funkcji masz w f["rank"])
+    # 4. Policz ile funkcji ma CC > 10 i jaki to procent
+    # 5. Zwróć to wszystko jako dict
     pass
 
 
@@ -211,12 +239,19 @@ def plot_histogram(functions: list[dict], output_path: str) -> None:
     complexities = [f["complexity"] for f in functions]
 
     # TODO: Twój kod tutaj
-    # Histogram z matplotlib
-    # Oś X: złożoność cyklomatyczna
-    # Oś Y: liczba funkcji
-    # Dodaj linie pionowe oznaczające progi (5, 10, 20, 30, 40)
-    # Kolorowanie: zielony (A), żółty (B), pomarańczowy (C),
-    #              czerwony (D), ciemnoczerwony (E), czarny (F)
+    # 1. plt.hist(complexities, bins=range(1, max(complexities)+2))
+    #    - to da histogram z jednym słupkiem na każdą wartość CC
+    # 2. Dodaj linie pionowe oznaczające progi rankingów:
+    #    plt.axvline(x=5.5, color="...", linestyle="--", label="A/B")
+    #    (analogicznie dla 10.5, 20.5, 30.5, 40.5)
+    # 3. Opcjonalnie: kolorowanie słupków per rank
+    #    Po plt.hist() możesz iterować po patches:
+    #    for patch in plt.gca().patches:
+    #        cc_val = patch.get_x()
+    #        patch.set_facecolor("green" if cc_val < 6 else "yellow" if ...)
+    # 4. plt.xlabel(...), plt.ylabel(...), plt.title(...)
+    # 5. plt.savefig(output_path, dpi=150) - WAŻNE: zapisz do pliku!
+    #    (sam plt.show() nie tworzy pliku PNG)
     pass
 
 
@@ -228,7 +263,8 @@ def print_report(functions: list[dict], stats: dict) -> None:
 
     print(f"\n--- Statystyki ogólne ---")
     print(f"  Liczba funkcji/metod: {len(functions)}")
-    # TODO: wydrukuj resztę statystyk
+    # TODO: wydrukuj resztę statystyk ze słownika stats
+    # (mean, median, stdev, procent z CC > 10)
 
     print(f"\n--- TOP 20 najbardziej złożonych ---")
     print(f"{'Rank':<5} {'CC':>4} {'Typ':<8} {'Nazwa':<40} {'Plik:linia'}")
@@ -241,7 +277,9 @@ def print_report(functions: list[dict], stats: dict) -> None:
               f"{f['name']:<40} {loc}")
 
     print(f"\n--- Rozkład rankingów ---")
-    # TODO: wydrukuj rozkład A/B/C/D/E/F
+    # TODO: wydrukuj rozkład A/B/C/D/E/F ze stats["rank_counts"]
+    # Format: "  A (1-5):    142 (75.9%)  ████████████"
+    # Pasek: np. chr(9608) * int(procent) albo "#" * int(procent)
 
 
 def main():
@@ -316,8 +354,8 @@ Czy pliki o wyższej złożoności mają więcej bugów? Sprawdźmy prostą kore
 **Pomysł:**
 - Dla każdego pliku `.py` w projekcie policz średnią CC (z radona)
 - Z `git log` wyciągnij liczbę commitów z "fix"/"bug"/"error" w message dotyczących tego pliku
-- Narysuj scatter plot: oś X = średnia CC, oś Y = liczba bugfix commitów
-- Policz korelację (Pearson lub Spearman)
+- Narysuj scatter plot: oś X = średnia CC, oś Y = liczba bugfix commitów (`plt.scatter(...)`)
+- Policz korelację: `scipy.stats.pearsonr(x, y)` lub `scipy.stats.spearmanr(x, y)` (`pip install scipy`)
 
 ```python
 import subprocess

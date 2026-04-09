@@ -10,7 +10,7 @@ Według badań (które właśnie wymyśliłem), rekord świata w złożoności c
 
 Na poprzednim labie liczyliśmy linie kodu - prosta metryka, ale mało mówi o tym, jak skomplikowana jest logika. Funkcja z 50 liniami prostych przypisań jest prostsza od funkcji z 20 liniami pełnymi zagnieżdżonych if-else.
 
-Złożoność cyklomatyczna (Cyclomatic Complexity, CC) Thomasa McCabe'a z 1976 roku mierzy liczbę niezależnych ścieżek przez kod. Każdy `if`, `for`, `while`, `and`, `or`, `except` dodaje jedną ścieżkę. Im więcej ścieżek, tym trudniej zrozumieć funkcję, tym więcej testów potrzeba, i tym większe ryzyko bugów.
+Złożoność cyklomatyczna (Cyclomatic Complexity, CC) Thomasa McCabe'a z 1976 roku mierzy liczbę niezależnych ścieżek przez kod. Każdy `if`, `elif`, `for`, `while`, `and`, `or`, `except`, `assert` dodaje jedną ścieżkę. Im więcej ścieżek, tym trudniej zrozumieć funkcję, tym więcej testów potrzeba, i tym większe ryzyko bugów.
 
 W praktyce CC służy do: identyfikacji funkcji wymagających refaktoryzacji, szacowania nakładu testowania, oceny jakości kodu w code review, i jako input do modeli predykcji defektów (które będziemy budować na labach 10-12).
 
@@ -144,7 +144,6 @@ Napiszcie skrypt `complexity_profiler.py`, który generuje kompletny profil zło
 import json
 import subprocess
 import sys
-from pathlib import Path
 from statistics import mean, median, stdev
 
 import matplotlib.pyplot as plt

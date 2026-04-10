@@ -4,7 +4,13 @@
 import json
 import subprocess
 import sys
+#
+from collections import Counter, defaultdict
+from statistics import mean, median, stdev
+
 import matplotlib.pyplot as plt
+#
+from scipy.stats import pearsonr, spearmanr
 
 
 def run_radon(project_path: str) -> dict:
@@ -171,6 +177,102 @@ def print_report(functions: list[dict], stats: dict) -> None:
             f"  {rank} {rank_ranges[rank]:<6} {count:>5} ({pct:>4.1f}%)  {bar}"
         )
 
+# ==
+
+def compute_file_avg_cc(functions: list[dict]) -> dict[str, float]:
+    """Compute average CC per file based on extracted functions."""
+    per_file: dict[str, list[int]] = defaultdict(list)
+    for f in functions:
+        per_file[f["file"]].append(f["complexity"])
+
+    return {path: mean(values) for path, values in per_file.items()}
+
+
+def count_bugfix_commits(repo_path: str) -> dict[str, int]:
+    """Count bugfix commits per file using git log."""
+    result = subprocess.run(
+        [
+            "git",
+            "log",
+            "--format=%s",
+            "--name-only",
+            "--grep=fix",
+            "--grep=bug",
+            "--grep=error",
+        ],
+        cwd=repo_path,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    file_counts = Counter()
+    lines = result.stdout.strip().split("\n") if result.stdout else []
+    for line in lines:
+        if line.endswith(".py"):
+            file_counts[line] += 1
+
+    return dict(file_counts)
+
+
+def normalize_basename_map(file_map: dict[str, float]) -> dict[str, list[tuple[str, float]]]:
+    """Map basenames to original paths and values for fuzzy path matching."""
+    normalized: dict[str, list[tuple[str, float]]] = defaultdict(list)
+    for path, value in file_map.items():
+        basename = path.split("/")[-1]
+        normalized[basename].append((path, value))
+    return normalized
+
+
+def build_cc_bugfix_pairs(
+    file_avg_cc: dict[str, float],
+    bugfix_counts: dict[str, int],
+) -> tuple[list[float], list[int]]:
+    """Match CC and bugfix counts by basename and return aligned arrays."""
+    cc_by_base = normalize_basename_map(file_avg_cc)
+    bugfix_by_base = normalize_basename_map(bugfix_counts)
+
+    x_vals: list[float] = []
+    y_vals: list[int] = []
+    for basename, cc_entries in cc_by_base.items():
+        bug_entries = bugfix_by_base.get(basename)
+        if not bug_entries:
+            continue
+        # If multiple files share a basename, take the mean CC and sum bugfixes.
+        cc_mean = mean(value for _, value in cc_entries)
+        bug_sum = sum(int(value) for _, value in bug_entries)
+        x_vals.append(cc_mean)
+        y_vals.append(bug_sum)
+
+    return x_vals, y_vals
+
+
+def plot_bugfix_correlation(x_vals: list[float], y_vals: list[int], output_path: str) -> None:
+    """Plot CC vs bugfix commit counts scatter plot."""
+    plt.figure(figsize=(7, 5))
+    plt.scatter(x_vals, y_vals, alpha=0.7, edgecolors="black")
+    plt.xlabel("Srednia zlozonosc cyklomatyczna (CC)")
+    plt.ylabel("Liczba commitow bugfix")
+    plt.title("Zaleznosc: zlozonosc a liczba bugfixow")
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=150)
+    plt.close()
+
+
+def print_correlation(x_vals: list[float], y_vals: list[int]) -> None:
+    """Print correlation metrics if enough data points exist."""
+    if len(x_vals) < 2 or len(y_vals) < 2:
+        print("\nZa malo danych do policzenia korelacji (min. 2 punkty).")
+        return
+
+    pearson_r, pearson_p = pearsonr(x_vals, y_vals)
+    spearman_r, spearman_p = spearmanr(x_vals, y_vals)
+    print("\n--- Korelacja zlozonosc vs bugfix ---")
+    print(f"  Pearson r:  {pearson_r:.3f} (p={pearson_p:.3g})")
+    print(f"  Spearman ρ: {spearman_r:.3f} (p={spearman_p:.3g})")
+
+# ==
+
 def main():
     if len(sys.argv) < 2:
         print("Użycie: python complexity_profiler.py <ścieżka_do_projektu>")
@@ -190,6 +292,16 @@ def main():
     print_report(functions, stats)
     plot_histogram(functions, "complexity_histogram.png")
     print(f"\nHistogram zapisany do: complexity_histogram.png")
+
+# ==
+    file_avg_cc = compute_file_avg_cc(functions)
+    bugfix_counts = count_bugfix_commits(project_path)
+    x_vals, y_vals = build_cc_bugfix_pairs(file_avg_cc, bugfix_counts)
+    plot_bugfix_correlation(x_vals, y_vals, "complexity_bugfix_scatter.png")
+    print(f"Histogram zapisany do: complexity_bugfix_scatter.png")
+    print_correlation(x_vals, y_vals)
+
+# ==
 
 if __name__ == "__main__":
     main()

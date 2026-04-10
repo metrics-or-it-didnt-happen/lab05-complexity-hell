@@ -1,0 +1,44 @@
+Analizuję złożoność: /tmp/requests/src/
+
+======================================================================
+PROFIL ZŁOŻONOŚCI CYKLOMATYCZNEJ
+======================================================================
+
+--- Statystyki ogólne ---
+  Liczba funkcji/metod: 233
+  Średnia CC:            3.5
+  Mediana CC:            2.0
+  Odch. standardowe:     3.7
+  Funkcje z CC > 10:     13 (5.6%)
+
+--- TOP 20 najbardziej złożonych ---
+Rank    CC Typ      Nazwa                                    Plik:linia
+------------------------------------------------------------------------------------------
+  D     21 method   _encode_files                            .../src/requests/models.py:139
+  C     19 method   build_digest_header                      ...ts/src/requests/auth.py:126
+  C     19 method   send                                     ...rc/requests/adapters.py:591
+  C     18 function super_len                                ...s/src/requests/utils.py:135
+  C     17 method   prepare_url                              .../src/requests/models.py:411
+  C     17 method   prepare_body                             .../src/requests/models.py:496
+  C     17 function should_bypass_proxies                    ...s/src/requests/utils.py:752
+  C     15 method   resolve_redirects                        ...rc/requests/sessions.py:160
+  C     14 method   cert_verify                              ...rc/requests/adapters.py:281
+  C     12 function get_netrc_auth                           ...s/src/requests/utils.py:206
+  C     11 method   send                                     ...rc/requests/sessions.py:675
+  C     11 method   _encode_params                           .../src/requests/models.py:109
+  C     11 function guess_json_utf                           ...s/src/requests/utils.py:944
+  B     10 method   should_strip_auth                        ...rc/requests/sessions.py:128
+  B     10 function check_compatibility                      ...src/requests/__init__.py:58
+  B      9 method   _find_no_duplicates                      ...src/requests/cookies.py:386
+  B      9 method   iter_lines                               .../src/requests/models.py:859
+  B      9 function proxy_bypass_registry                    ...ts/src/requests/utils.py:76
+  B      8 function remove_cookie_by_name                    ...src/requests/cookies.py:151
+  B      8 function merge_setting                            ...src/requests/sessions.py:62
+
+--- Rozkład rankingów ---
+  A (  1-5):  188 ( 80.7%) |████████████████████████████████        |
+  B ( 6-10):   32 ( 13.7%) |█████                                   |
+  C (11-20):   12 (  5.2%) |██                                      |
+  D (21-30):    1 (  0.4%) |                                        |
+  E (31-40):    0 (  0.0%) |                                        |
+  F (  41+):    0 (  0.0%) |                                        |

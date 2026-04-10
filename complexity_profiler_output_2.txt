@@ -1,0 +1,44 @@
+Analizuję złożoność: /tmp/flask/src/flask
+
+======================================================================
+PROFIL ZŁOŻONOŚCI CYKLOMATYCZNEJ
+======================================================================
+
+--- Statystyki ogólne ---
+  Liczba funkcji/metod: 358
+  Średnia CC:            2.7
+  Mediana CC:            2.0
+  Odch. standardowe:     2.8
+  Funkcje z CC > 10:     10 (2.8%)
+
+--- TOP 20 najbardziej złożonych ---
+Rank    CC Typ      Nazwa                                    Plik:linia
+------------------------------------------------------------------------------------------
+  D     23 method   register                                 ...sk/sansio/blueprints.py:273
+  C     18 function routes_command                           ...flask/src/flask/cli.py:1061
+  C     16 method   make_response                            ...flask/src/flask/app.py:1224
+  C     14 function find_app_by_string                       .../flask/src/flask/cli.py:120
+  C     13 function load_dotenv                              .../flask/src/flask/cli.py:698
+  C     13 method   url_for                                  ...flask/src/flask/app.py:1102
+  C     13 function explain_template_loading_attempts        ...c/flask/debughelpers.py:124
+  C     13 method   add_url_rule                             ...src/flask/sansio/app.py:602
+  C     12 function find_best_app                            /tmp/flask/src/flask/cli.py:41
+  C     12 method   run                                      .../flask/src/flask/app.py:632
+  B     10 function _validate_key                            .../flask/src/flask/cli.py:828
+  B     10 method   __init_subclass__                        .../flask/src/flask/app.py:254
+  B     10 function get_root_path                            ...sk/src/flask/helpers.py:587
+  B     10 function _find_package_path                       ...lask/sansio/scaffold.py:709
+  B      9 method   __init__                                 ...ask/src/flask/testing.py:49
+  B      8 method   load_app                                 .../flask/src/flask/cli.py:333
+  B      8 method   preprocess_request                       ...flask/src/flask/app.py:1366
+  B      8 function _dump_loader_info                        ...c/flask/debughelpers.py:107
+  B      7 method   from_prefixed_env                        ...ask/src/flask/config.py:126
+  B      7 method   create_url_adapter                       .../flask/src/flask/app.py:509
+
+--- Rozkład rankingów ---
+  A (  1-5):  319 ( 89.1%) |████████████████████████████████████    |
+  B ( 6-10):   29 (  8.1%) |███                                     |
+  C (11-20):    9 (  2.5%) |█                                       |
+  D (21-30):    1 (  0.3%) |                                        |
+  E (31-40):    0 (  0.0%) |                                        |
+  F (  41+):    0 (  0.0%) |                                        |

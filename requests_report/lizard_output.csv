@@ -1,0 +1,241 @@
+nloc,ccn,token_count,parameter_count,length,location,file,function_name,long_name,start_line,end_line
+4,1,32,2,4,"__init__@35-38@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__init__","__init__( self , request )",35,38
+2,1,9,1,2,"get_type@40-41@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_type","get_type( self )",40,41
+2,1,16,1,2,"get_host@43-44@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_host","get_host( self )",43,44
+2,1,11,1,2,"get_origin_req_host@46-47@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_origin_req_host","get_origin_req_host( self )",46,47
+15,2,79,1,19,"get_full_url@49-67@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_full_url","get_full_url( self )",49,67
+2,1,7,1,2,"is_unverifiable@69-70@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","is_unverifiable","is_unverifiable( self )",69,70
+2,2,21,2,2,"has_header@72-73@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","has_header","has_header( self , name )",72,73
+2,1,33,3,2,"get_header@75-76@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_header","get_header( self , name , default = None )",75,76
+4,1,15,3,5,"add_header@78-82@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","add_header","add_header( self , key , val )",78,82
+2,1,17,3,2,"add_unredirected_header@84-85@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","add_unredirected_header","add_unredirected_header( self , name , value )",84,85
+2,1,9,1,2,"get_new_headers@87-88@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_new_headers","get_new_headers( self )",87,88
+2,1,11,1,2,"unverifiable@91-92@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","unverifiable","unverifiable( self )",91,92
+2,1,11,1,2,"origin_req_host@95-96@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","origin_req_host","origin_req_host( self )",95,96
+2,1,11,1,2,"host@99-100@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","host","host( self )",99,100
+2,1,13,2,6,"__init__@110-115@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__init__","__init__( self , headers )",110,115
+2,1,9,1,2,"info@117-118@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","info","info( self )",117,118
+2,1,15,2,2,"getheaders@120-121@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","getheaders","getheaders( self , name )",120,121
+6,3,50,3,14,"extract_cookies_to_jar@124-137@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","extract_cookies_to_jar","extract_cookies_to_jar( jar , request , response )",124,137
+4,1,31,2,9,"get_cookie_header@140-148@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_cookie_header","get_cookie_header( jar , request )",140,148
+12,8,96,4,17,"remove_cookie_by_name@151-167@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","remove_cookie_by_name","remove_cookie_by_name( cookiejar , name , domain = None , path = None )",151,167
+5,2,38,5,11,"get@194-204@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get","get( self , name , default = None , domain = None , path = None )",194,204
+12,3,78,4,18,"set@206-223@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","set","set( self , name , value , ** kwargs )",206,223
+3,2,18,1,8,"iterkeys@225-232@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","iterkeys","iterkeys( self )",225,232
+2,1,15,1,7,"keys@234-240@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","keys","keys( self )",234,240
+3,2,18,1,8,"itervalues@242-249@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","itervalues","itervalues( self )",242,249
+2,1,15,1,7,"values@251-257@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","values","values( self )",251,257
+3,2,22,1,8,"iteritems@259-266@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","iteritems","iteritems( self )",259,266
+2,1,15,1,8,"items@268-275@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","items","items( self )",268,275
+6,3,36,1,7,"list_domains@277-283@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","list_domains","list_domains( self )",277,283
+6,3,36,1,7,"list_paths@285-291@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","list_paths","list_paths( self )",285,291
+7,4,44,1,12,"multiple_domains@293-304@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","multiple_domains","multiple_domains( self )",293,304
+8,6,63,3,14,"get_dict@306-319@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_dict","get_dict( self , domain = None , path = None )",306,319
+5,2,23,2,5,"__contains__@321-325@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__contains__","__contains__( self , name )",321,325
+2,1,15,2,8,"__getitem__@327-334@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__getitem__","__getitem__( self , name )",327,334
+2,1,18,3,6,"__setitem__@336-341@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__setitem__","__setitem__( self , name , value )",336,341
+2,1,14,2,5,"__delitem__@343-347@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__delitem__","__delitem__( self , name )",343,347
+8,4,72,4,8,"set_cookie@349-356@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","set_cookie","set_cookie( self , cookie , * args , ** kwargs )",349,356
+6,3,44,2,7,"update@358-364@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","update","update( self , other )",358,364
+7,7,63,4,19,"_find@366-384@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","_find","_find( self , name , domain = None , path = None )",366,384
+14,9,84,4,28,"_find_no_duplicates@386-413@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","_find_no_duplicates","_find_no_duplicates( self , name , domain = None , path = None )",386,413
+4,1,23,1,6,"__getstate__@415-420@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__getstate__","__getstate__( self )",415,420
+4,2,33,2,5,"__setstate__@422-426@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","__setstate__","__setstate__( self , state )",422,426
+5,1,29,1,6,"copy@428-433@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","copy","copy( self )",428,433
+2,1,10,1,3,"get_policy@435-437@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","get_policy","get_policy( self )",435,437
+10,4,57,1,13,"_copy_cookie_jar@440-452@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","_copy_cookie_jar","_copy_cookie_jar( jar )",440,452
+27,2,155,3,35,"create_cookie@455-489@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","create_cookie","create_cookie( name , value , ** kwargs )",455,489
+25,5,164,1,27,"morsel_to_cookie@492-518@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","morsel_to_cookie","morsel_to_cookie( morsel )",492,518
+9,7,72,3,19,"cookiejar_from_dict@521-539@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","cookiejar_from_dict","cookiejar_from_dict( cookie_dict , cookiejar = None , overwrite = True )",521,539
+12,6,80,2,20,"merge_cookies@542-561@/tmp/requests/src/requests/cookies.py","/tmp/requests/src/requests/cookies.py","merge_cookies","merge_cookies( cookiejar , cookies )",542,561
+27,5,127,2,42,"_basic_auth_str@25-66@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","_basic_auth_str","_basic_auth_str( username , password )",25,66
+2,1,12,2,2,"__call__@72-73@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__call__","__call__( self , r )",72,73
+3,1,19,3,3,"__init__@79-81@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__init__","__init__( self , username , password )",79,81
+7,1,39,2,7,"__eq__@83-89@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__eq__","__eq__( self , other )",83,89
+2,1,12,2,2,"__ne__@91-92@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__ne__","__ne__( self , other )",91,92
+3,1,26,2,3,"__call__@94-96@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__call__","__call__( self , r )",94,96
+3,1,26,2,3,"__call__@102-104@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__call__","__call__( self , r )",102,104
+4,1,28,3,5,"__init__@110-114@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__init__","__init__( self , username , password )",110,114
+8,2,59,1,9,"init_per_thread_state@116-124@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","init_per_thread_state","init_per_thread_state( self )",116,124
+4,2,32,1,4,"build_digest_header.md5_utf8@145-148@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","build_digest_header.md5_utf8","build_digest_header.md5_utf8( x )",145,148
+4,2,32,1,4,"build_digest_header.sha_utf8@153-156@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","build_digest_header.sha_utf8","build_digest_header.sha_utf8( x )",153,156
+4,2,32,1,4,"build_digest_header.sha256_utf8@161-164@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","build_digest_header.sha256_utf8","build_digest_header.sha256_utf8( x )",161,164
+4,2,32,1,4,"build_digest_header.sha512_utf8@169-172@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","build_digest_header.sha512_utf8","build_digest_header.sha512_utf8( x )",169,172
+68,19,383,3,109,"build_digest_header@126-234@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","build_digest_header","build_digest_header( self , method , url )",126,234
+3,2,23,3,4,"handle_redirect@236-239@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","handle_redirect","handle_redirect( self , r , ** kwargs )",236,239
+25,5,221,3,43,"handle_401@241-283@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","handle_401","handle_401( self , r , ** kwargs )",241,283
+12,3,92,2,19,"__call__@285-303@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__call__","__call__( self , r )",285,303
+7,1,39,2,7,"__eq__@305-311@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__eq__","__eq__( self , other )",305,311
+2,1,12,2,2,"__ne__@313-314@/tmp/requests/src/requests/auth.py","/tmp/requests/src/requests/auth.py","__ne__","__ne__( self , other )",313,314
+15,8,97,3,28,"merge_setting@62-89@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","merge_setting","merge_setting( request_setting , session_setting , dict_class = OrderedDict )",62,89
+6,5,55,3,13,"merge_hooks@92-104@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","merge_hooks","merge_hooks( request_hooks , session_hooks , dict_class = OrderedDict )",92,104
+6,2,38,2,19,"get_redirect_target@108-126@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","get_redirect_target","get_redirect_target( self , resp )",108,126
+22,10,128,3,31,"should_strip_auth@128-158@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","should_strip_auth","should_strip_auth( self , old_url , new_url )",128,158
+80,15,453,10,121,"resolve_redirects@160-280@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","resolve_redirects","resolve_redirects( self , resp , req , stream = False , timeout = None , verify = True , cert = None , proxies = None , yield_requests = False , ** adapter_kwargs , )",160,280
+10,5,67,3,19,"rebuild_auth@282-300@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","rebuild_auth","rebuild_auth( self , prepared_request , response )",282,300
+13,6,96,3,30,"rebuild_proxies@302-331@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","rebuild_proxies","rebuild_proxies( self , prepared_request , proxies )",302,331
+9,7,68,3,21,"rebuild_method@333-353@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","rebuild_method","rebuild_method( self , prepared_request , response )",333,353
+15,1,97,1,62,"__init__@390-451@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","__init__","__init__( self )",390,451
+2,1,7,1,2,"__enter__@453-454@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","__enter__","__enter__( self )",453,454
+2,1,13,2,2,"__exit__@456-457@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","__exit__","__exit__( self , * args )",456,457
+26,6,180,2,42,"prepare_request@459-500@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","prepare_request","prepare_request( self , request )",459,500
+43,4,185,17,92,"request@502-593@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","request","request( self , method , url , params = None , data = None , headers = None , cookies = None , files = None , auth = None , timeout = None , allow_redirects = True , proxies = None , hooks = None , stream = None , verify = None , cert = None , json = None , )",502,593
+9,1,32,3,10,"get@595-604@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","get","get( self , url , ** kwargs )",595,604
+9,1,32,3,10,"options@606-615@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","options","options( self , url , ** kwargs )",606,615
+9,1,32,3,10,"head@617-626@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","head","head( self , url , ** kwargs )",617,626
+11,1,40,5,12,"post@628-639@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","post","post( self , url , data = None , json = None , ** kwargs )",628,639
+10,1,32,4,11,"put@641-651@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","put","put( self , url , data = None , ** kwargs )",641,651
+10,1,32,4,11,"patch@653-663@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","patch","patch( self , url , data = None , ** kwargs )",653,663
+8,1,24,3,9,"delete@665-673@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","delete","delete( self , url , ** kwargs )",665,673
+40,11,291,3,76,"send@675-750@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","send","send( self , request , ** kwargs )",675,750
+17,8,155,6,30,"merge_environment_settings@752-781@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","merge_environment_settings","merge_environment_settings( self , url , proxies , stream , verify , cert )",752,781
+5,3,45,2,12,"get_adapter@783-794@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","get_adapter","get_adapter( self , url )",783,794
+3,2,22,1,4,"close@796-799@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","close","close( self )",796,799
+5,4,59,3,10,"mount@801-810@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","mount","mount( self , prefix , adapter )",801,810
+3,2,27,1,3,"__getstate__@812-814@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","__getstate__","__getstate__( self )",812,814
+3,2,26,2,3,"__setstate__@816-818@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","__setstate__","__setstate__( self , state )",816,818
+2,1,9,0,13,"session@821-833@/tmp/requests/src/requests/sessions.py","/tmp/requests/src/requests/sessions.py","session","session( )",821,833
+2,2,15,0,2,"default_hooks@16-17@/tmp/requests/src/requests/hooks.py","/tmp/requests/src/requests/hooks.py","default_hooks","default_hooks( )",16,17
+11,6,68,4,12,"dispatch_hook@23-34@/tmp/requests/src/requests/hooks.py","/tmp/requests/src/requests/hooks.py","dispatch_hook","dispatch_hook( key , hooks , hook_data , ** kwargs )",23,34
+9,4,38,0,10,"_resolve_char_detection@30-39@/tmp/requests/src/requests/compat.py","/tmp/requests/src/requests/compat.py","_resolve_char_detection","_resolve_char_detection( )",30,39
+12,3,63,1,19,"path_url@88-106@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","path_url","path_url( self )",88,106
+21,11,136,1,28,"_encode_params@109-136@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","_encode_params","_encode_params( data )",109,136
+49,21,311,2,67,"_encode_files@139-205@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","_encode_files","_encode_files( files , data )",139,205
+7,6,73,3,10,"register_hook@209-218@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","register_hook","register_hook( self , event , hook )",209,218
+6,2,30,3,10,"deregister_hook@220-229@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","deregister_hook","deregister_hook( self , event , hook )",220,229
+30,7,174,11,33,"__init__@260-292@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__init__","__init__( self , method = None , url = None , headers = None , files = None , data = None , params = None , auth = None , cookies = None , hooks = None , json = None , )",260,292
+2,1,8,1,2,"__repr__@294-295@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__repr__","__repr__( self )",294,295
+15,1,78,1,16,"prepare@297-312@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare","prepare( self )",297,312
+8,1,42,1,16,"__init__@336-351@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__init__","__init__( self )",336,351
+20,1,97,11,27,"prepare@353-379@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare","prepare( self , method = None , url = None , headers = None , files = None , data = None , params = None , auth = None , cookies = None , hooks = None , json = None , )",353,379
+2,1,8,1,2,"__repr__@381-382@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__repr__","__repr__( self )",381,382
+10,2,77,1,10,"copy@384-393@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","copy","copy( self )",384,393
+4,2,35,2,5,"prepare_method@395-399@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_method","prepare_method( self , method )",395,399
+7,2,35,1,8,"_get_idna_encoded_host@402-409@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","_get_idna_encoded_host","_get_idna_encoded_host( host )",402,409
+45,17,256,3,73,"prepare_url@411-483@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_url","prepare_url( self , url , params )",411,483
+7,3,47,2,10,"prepare_headers@485-494@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_headers","prepare_headers( self , headers )",485,494
+50,17,285,4,77,"prepare_body@496-572@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_body","prepare_body( self , data , files , json = None )",496,572
+10,5,67,2,15,"prepare_content_length@574-588@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_content_length","prepare_content_length( self , body )",574,588
+10,6,84,3,21,"prepare_auth@590-610@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_auth","prepare_auth( self , auth , url = '' )",590,610
+8,3,57,2,19,"prepare_cookies@612-630@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_cookies","prepare_cookies( self , cookies )",612,630
+4,3,30,2,8,"prepare_hooks@632-639@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","prepare_hooks","prepare_hooks( self , hooks )",632,639
+14,1,82,1,46,"__init__@660-705@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__init__","__init__( self )",660,705
+2,1,7,1,2,"__enter__@707-708@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__enter__","__enter__( self )",707,708
+2,1,13,2,2,"__exit__@710-711@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__exit__","__exit__( self , * args )",710,711
+4,3,33,1,7,"__getstate__@713-719@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__getstate__","__getstate__( self )",713,719
+5,2,42,2,7,"__setstate__@721-727@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__setstate__","__setstate__( self , state )",721,727
+2,1,8,1,2,"__repr__@729-730@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__repr__","__repr__( self )",729,730
+2,1,10,1,9,"__bool__@732-740@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__bool__","__bool__( self )",732,740
+2,1,10,1,9,"__nonzero__@742-750@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__nonzero__","__nonzero__( self )",742,750
+2,1,13,1,3,"__iter__@752-754@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","__iter__","__iter__( self )",752,754
+6,2,20,1,13,"ok@757-769@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","ok","ok( self )",757,769
+2,2,18,1,5,"is_redirect@772-776@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","is_redirect","is_redirect( self )",772,776
+5,2,27,1,6,"is_permanent_redirect@779-784@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","is_permanent_redirect","is_permanent_redirect( self )",779,784
+2,1,10,1,3,"next@787-789@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","next","next( self )",787,789
+5,2,28,1,8,"apparent_encoding@792-799@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","apparent_encoding","apparent_encoding( self )",792,799
+19,8,97,0,22,"iter_content.generate@818-839@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","iter_content.generate","iter_content.generate( )",818,839
+14,7,91,3,57,"iter_content@801-857@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","iter_content","iter_content( self , chunk_size = 1 , decode_unicode = False )",801,857
+20,9,118,4,32,"iter_lines@859-890@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","iter_lines","iter_lines( self , chunk_size = ITER_CHUNK_SIZE , decode_unicode = False , delimiter = None )",859,890
+10,6,71,1,17,"content@893-909@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","content","content( self )",893,909
+12,4,71,1,36,"text@912-947@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","text","text( self )",912,947
+22,8,120,2,34,"json@949-982@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","json","json( self , ** kwargs )",949,982
+9,4,57,1,15,"links@985-999@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","links","links( self )",985,999
+19,6,93,1,28,"raise_for_status@1001-1028@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","raise_for_status","raise_for_status( self )",1001,1028
+6,3,40,1,12,"close@1030-1041@/tmp/requests/src/requests/models.py","/tmp/requests/src/requests/models.py","close","close( self )",1030,1041
+24,5,215,3,33,"check_compatibility@58-90@/tmp/requests/src/requests/__init__.py","/tmp/requests/src/requests/__init__.py","check_compatibility","check_compatibility( urllib3_version , chardet_version , charset_normalizer_version )",58,90
+10,3,52,1,12,"_check_cryptography@93-104@/tmp/requests/src/requests/__init__.py","/tmp/requests/src/requests/__init__.py","_check_cryptography","_check_cryptography( cryptography_version )",93,104
+3,2,29,1,3,"_init.doc@116-118@/tmp/requests/src/requests/status_codes.py","/tmp/requests/src/requests/status_codes.py","_init.doc","_init.doc( code )",116,118
+13,6,88,0,17,"_init@109-125@/tmp/requests/src/requests/status_codes.py","/tmp/requests/src/requests/status_codes.py","_init","_init( )",109,125
+3,1,36,3,46,"request@14-59@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","request","request( method , url , ** kwargs )",14,59
+11,1,28,3,12,"get@62-73@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","get","get( url , params = None , ** kwargs )",62,73
+9,1,20,2,10,"options@76-85@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","options","options( url , ** kwargs )",76,85
+12,1,28,2,13,"head@88-100@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","head","head( url , ** kwargs )",88,100
+12,1,36,4,13,"post@103-115@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","post","post( url , data = None , json = None , ** kwargs )",103,115
+12,1,28,3,13,"put@118-130@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","put","put( url , data = None , ** kwargs )",118,130
+12,1,28,3,13,"patch@133-145@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","patch","patch( url , data = None , ** kwargs )",133,145
+9,1,20,2,10,"delete@148-157@/tmp/requests/src/requests/api.py","/tmp/requests/src/requests/api.py","delete","delete( url , ** kwargs )",148,157
+6,2,33,2,11,"to_native_string@26-36@/tmp/requests/src/requests/_internal_utils.py","/tmp/requests/src/requests/_internal_utils.py","to_native_string","to_native_string( string , encoding = 'ascii' )",26,36
+7,2,28,1,13,"unicode_is_ascii@39-51@/tmp/requests/src/requests/_internal_utils.py","/tmp/requests/src/requests/_internal_utils.py","unicode_is_ascii","unicode_is_ascii( u_string )",39,51
+28,9,162,1,37,"proxy_bypass_registry@76-112@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","proxy_bypass_registry","proxy_bypass_registry( host )",76,112
+5,2,23,1,10,"proxy_bypass@114-123@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","proxy_bypass","proxy_bypass( host )",114,123
+4,2,23,1,7,"dict_to_sequence@126-132@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","dict_to_sequence","dict_to_sequence( d )",126,132
+45,16,211,1,69,"super_len@135-203@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","super_len","super_len( o )",135,203
+28,12,163,2,42,"get_netrc_auth@206-247@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_netrc_auth","get_netrc_auth( url , raise_errors = False )",206,247
+4,5,50,1,5,"guess_filename@250-254@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","guess_filename","guess_filename( obj )",250,254
+21,8,163,1,36,"extract_zipped_paths@257-292@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","extract_zipped_paths","extract_zipped_paths( path )",257,292
+9,2,59,1,10,"atomic_open@296-305@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","atomic_open","atomic_open( filename )",296,305
+6,3,39,1,25,"from_key_val_list@308-332@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","from_key_val_list","from_key_val_list( value )",308,332
+8,4,54,1,27,"to_key_val_list@335-361@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","to_key_val_list","to_key_val_list( value )",335,361
+7,3,54,1,29,"parse_list_header@365-393@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","parse_list_header","parse_list_header( value )",365,393
+11,4,79,1,32,"parse_dict_header@397-428@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","parse_dict_header","parse_dict_header( value )",397,428
+13,5,66,2,23,"unquote_header_value@432-454@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","unquote_header_value","unquote_header_value( value , is_filename = False )",432,454
+3,2,23,1,9,"dict_from_cookiejar@457-465@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","dict_from_cookiejar","dict_from_cookiejar( cj )",457,465
+2,1,15,2,9,"add_dict_to_cookiejar@468-476@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","add_dict_to_cookiejar","add_dict_to_cookiejar( cj , cookie_dict )",468,476
+17,1,81,1,23,"get_encodings_from_content@479-501@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_encodings_from_content","get_encodings_from_content( content )",479,501
+12,4,108,1,20,"_parse_content_type_header@504-523@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","_parse_content_type_header","_parse_content_type_header( header )",504,523
+11,5,57,1,23,"get_encoding_from_headers@526-548@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_encoding_from_headers","get_encoding_from_headers( headers )",526,548
+12,5,70,2,15,"stream_decode_response_unicode@551-565@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","stream_decode_response_unicode","stream_decode_response_unicode( iterator , r )",551,565
+7,4,46,2,8,"iter_slices@568-575@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","iter_slices","iter_slices( string , slice_length )",568,575
+20,4,76,1,37,"get_unicode_from_response@578-614@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_unicode_from_response","get_unicode_from_response( r )",578,614
+16,6,119,1,22,"unquote_unreserved@623-644@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","unquote_unreserved","unquote_unreserved( uri )",623,644
+7,2,38,1,20,"requote_uri@647-666@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","requote_uri","requote_uri( uri )",647,666
+6,1,92,2,13,"address_in_network@669-681@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","address_in_network","address_in_network( ip , net )",669,681
+3,1,34,1,9,"dotted_netmask@684-692@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","dotted_netmask","dotted_netmask( mask )",684,692
+6,2,21,1,9,"is_ipv4_address@695-703@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","is_ipv4_address","is_ipv4_address( string_ip )",695,703
+15,6,75,1,22,"is_valid_cidr@706-727@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","is_valid_cidr","is_valid_cidr( string_network )",706,727
+13,5,65,2,19,"set_environ@731-749@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","set_environ","set_environ( env_name , value )",731,749
+2,2,27,1,2,"should_bypass_proxies.get_proxy@761-762@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","should_bypass_proxies.get_proxy","should_bypass_proxies.get_proxy( key )",761,762
+32,17,182,2,59,"should_bypass_proxies@752-810@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","should_bypass_proxies","should_bypass_proxies( url , no_proxy )",752,810
+5,2,29,2,10,"get_environ_proxies@813-822@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_environ_proxies","get_environ_proxies( url , no_proxy = None )",813,822
+17,5,91,2,24,"select_proxy@825-848@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","select_proxy","select_proxy( url , proxies )",825,848
+12,5,102,3,25,"resolve_proxies@851-875@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","resolve_proxies","resolve_proxies( request , proxies , trust_env = True )",851,875
+2,1,11,1,7,"default_user_agent@878-884@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","default_user_agent","default_user_agent( name = 'python-requests' )",878,884
+9,1,29,0,12,"default_headers@887-898@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","default_headers","default_headers( )",887,898
+20,6,125,1,35,"parse_header_links@901-935@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","parse_header_links","parse_header_links( value )",901,935
+22,11,132,1,30,"guess_json_utf@944-973@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","guess_json_utf","guess_json_utf( data )",944,973
+13,5,93,2,27,"prepend_scheme_if_needed@976-1002@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","prepend_scheme_if_needed","prepend_scheme_if_needed( url , new_scheme )",976,1002
+7,2,47,1,14,"get_auth_from_url@1005-1018@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","get_auth_from_url","get_auth_from_url( url )",1005,1018
+4,1,27,1,9,"check_header_validity@1021-1029@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","check_header_validity","check_header_validity( header )",1021,1029
+16,5,73,3,17,"_validate_header_part@1032-1048@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","_validate_header_part","_validate_header_part( header , header_part , header_validator_index )",1032,1048
+6,2,64,1,15,"urldefragauth@1051-1065@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","urldefragauth","urldefragauth( url )",1051,1065
+13,4,56,1,16,"rewind_body@1068-1083@/tmp/requests/src/requests/utils.py","/tmp/requests/src/requests/utils.py","rewind_body","rewind_body( prepared_request )",1068,1083
+7,4,78,3,8,"__init__@18-25@/tmp/requests/src/requests/exceptions.py","/tmp/requests/src/requests/exceptions.py","__init__","__init__( self , * args , ** kwargs )",18,25
+3,1,35,3,9,"__init__@35-43@/tmp/requests/src/requests/exceptions.py","/tmp/requests/src/requests/exceptions.py","__init__","__init__( self , * args , ** kwargs )",35,43
+2,1,13,1,9,"__reduce__@45-53@/tmp/requests/src/requests/exceptions.py","/tmp/requests/src/requests/exceptions.py","__reduce__","__reduce__( self )",45,53
+5,2,37,3,5,"__init__@40-44@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__init__","__init__( self , data = None , ** kwargs )",40,44
+2,1,25,3,4,"__setitem__@46-49@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__setitem__","__setitem__( self , key , value )",46,49
+2,1,21,2,2,"__getitem__@51-52@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__getitem__","__getitem__( self , key )",51,52
+2,1,18,2,2,"__delitem__@54-55@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__delitem__","__delitem__( self , key )",54,55
+2,2,21,1,2,"__iter__@57-58@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__iter__","__iter__( self )",57,58
+2,1,12,1,2,"__len__@60-61@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__len__","__len__( self )",60,61
+2,2,31,1,3,"lower_items@63-65@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","lower_items","lower_items( self )",63,65
+6,2,43,2,7,"__eq__@67-73@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__eq__","__eq__( self , other )",67,73
+2,1,16,1,2,"copy@76-77@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","copy","copy( self )",76,77
+2,1,17,1,2,"__repr__@79-80@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__repr__","__repr__( self )",79,80
+3,1,21,2,3,"__init__@86-88@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__init__","__init__( self , name = None )",86,88
+2,1,8,1,2,"__repr__@90-91@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__repr__","__repr__( self )",90,91
+2,1,18,2,4,"__getitem__@93-96@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","__getitem__","__getitem__( self , key )",93,96
+2,1,22,3,2,"get@98-99@/tmp/requests/src/requests/structures.py","/tmp/requests/src/requests/structures.py","get","get( self , key , default = None )",98,99
+18,6,102,0,30,"_implementation@34-63@/tmp/requests/src/requests/help.py","/tmp/requests/src/requests/help.py","_implementation","_implementation( )",34,63
+52,6,235,0,57,"info@66-122@/tmp/requests/src/requests/help.py","/tmp/requests/src/requests/help.py","info","info( )",66,122
+2,1,24,0,3,"main@125-127@/tmp/requests/src/requests/help.py","/tmp/requests/src/requests/help.py","main","main( )",125,127
+2,1,14,2,2,"SOCKSProxyManager@63-64@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","SOCKSProxyManager","SOCKSProxyManager( * args , ** kwargs )",63,64
+32,7,171,0,35,"_urllib3_request_context@77-111@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","_urllib3_request_context","_urllib3_request_context( request : 'PreparedRequest' , verify : 'bool | str | None' , client_cert : 'tuple[str, str] | str | None' , poolmanager : 'PoolManager' , )",77,111
+2,1,12,1,2,"__init__@117-118@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","__init__","__init__( self )",117,118
+4,1,30,7,18,"send@120-137@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","send","send( self , request , stream = False , timeout = None , verify = True , cert = None , proxies = None )",120,137
+2,1,8,1,3,"close@139-141@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","close","close( self )",139,141
+18,2,97,5,21,"__init__@179-199@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","__init__","__init__( self , pool_connections = DEFAULT_POOLSIZE , pool_maxsize = DEFAULT_POOLSIZE , max_retries = DEFAULT_RETRIES , pool_block = DEFAULT_POOLBLOCK , )",179,199
+2,2,24,1,2,"__getstate__@201-202@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","__getstate__","__getstate__( self )",201,202
+8,2,56,2,12,"__setstate__@204-215@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","__setstate__","__setstate__( self , state )",204,215
+12,1,54,5,25,"init_poolmanager@217-241@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","init_poolmanager","init_poolmanager( self , connections , maxsize , block = DEFAULT_POOLBLOCK , ** pool_kwargs )",217,241
+25,3,140,3,37,"proxy_manager_for@243-279@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","proxy_manager_for","proxy_manager_for( self , proxy , ** proxy_kwargs )",243,279
+37,14,202,5,55,"cert_verify@281-335@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","cert_verify","cert_verify( self , conn , url , verify , cert )",281,335
+15,2,120,3,36,"build_response@337-372@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","build_response","build_response( self , req , resp )",337,372
+2,1,27,4,49,"build_connection_pool_key_attributes@374-422@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","build_connection_pool_key_attributes","build_connection_pool_key_attributes( self , request , verify , cert = None )",374,422
+27,4,128,5,48,"get_connection_with_tls_context@424-471@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","get_connection_with_tls_context","get_connection_with_tls_context( self , request , verify , proxies = None , cert = None )",424,471
+26,3,106,3,40,"get_connection@473-512@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","get_connection","get_connection( self , url , proxies = None )",473,512
+4,2,29,1,9,"close@514-522@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","close","close( self )",514,522
+14,6,96,3,31,"request_url@524-554@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","request_url","request_url( self , request , proxies )",524,554
+2,1,12,3,13,"add_headers@556-568@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","add_headers","add_headers( self , request , ** kwargs )",556,568
+6,2,36,2,20,"proxy_headers@570-589@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","proxy_headers","proxy_headers( self , proxy )",570,589
+74,19,466,7,107,"send@591-697@/tmp/requests/src/requests/adapters.py","/tmp/requests/src/requests/adapters.py","send","send( self , request , stream = False , timeout = None , verify = True , cert = None , proxies = None )",591,697

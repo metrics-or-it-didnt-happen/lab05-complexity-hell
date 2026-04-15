@@ -1,0 +1,3 @@
+[submodule "oss/requests"]
+	path = oss/requests
+	url = https://github.com/psf/requests.git

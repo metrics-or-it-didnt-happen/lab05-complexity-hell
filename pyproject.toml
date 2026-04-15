@@ -1,0 +1,11 @@
+[project]
+name = "complexity-hell"
+version = "0.1.0"
+description = "Complexity Hell - cyclomatic complexity profiling of Python projects"
+requires-python = ">=3.14"
+dependencies = [
+    "radon>=6",
+    "lizard>=1.17",
+    "altair>=5",
+    "vl-convert-python>=1",
+]

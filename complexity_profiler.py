@@ -75,10 +75,11 @@ def compute_stats(functions: list[dict]) -> dict:
     #    (rank każdej funkcji masz w f["rank"])
     # 4. Policz ile funkcji ma CC > 10 i jaki to procent
     # 5. Zwróć to wszystko jako dict
+    stdev_check = stdev(complexities) if len(complexities) >= 2 else 0.0
     return {
         "mean": mean(complexities),
         "median": median(complexities),
-        "stdev": stdev(complexities),
+        "stdev": stdev_check(complexities),
         "rank_counts": dict(c_rank),
         "above_10_count": above_10_count,
         "above_10_pct": above_10_pct,
